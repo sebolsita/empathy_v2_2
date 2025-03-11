@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+/*using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-
+*/
 namespace Amused.Interactions
 {
     public class SimpleDoorTouch : MonoBehaviour
@@ -38,7 +38,7 @@ namespace Amused.Interactions
 
             if (other.CompareTag("PlayerHand"))
             {
-                TriggerHapticFeedback(other);
+                //TriggerHapticFeedback(other);
 
                 string side = GetInteractionSide(other.transform.position);
                 ToggleDoor(side);
@@ -78,7 +78,7 @@ namespace Amused.Interactions
             audioSource.Play();
         }
 
-        private void TriggerHapticFeedback(Collider other)
+/*        private void TriggerHapticFeedback(Collider other)
         {
             XRDirectInteractor interactor = other.GetComponentInParent<XRDirectInteractor>();
 
@@ -90,7 +90,7 @@ namespace Amused.Interactions
                     hapticImpulse.SendHapticImpulse(hapticIntensity, hapticDuration);
                 }
             }
-        }
+        }*/
 
         #endregion
 
