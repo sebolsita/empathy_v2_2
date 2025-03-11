@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/FEATURES/VR_BASKET_DESERT_HANGAR.unity
+    path: Assets/FEATURES/Setting_things_up_1.unity
     guid: cd9b80473bec0a049b2f6ab9d13611fa
   - enabled: 1
     path: Assets/FEATURES/AR_BASKET.unity
