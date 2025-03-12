@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/FEATURES/Setting_things_up_1.unity
+    path: Assets/FEATURES/_SCENES/Setting_things_up_1.unity
     guid: cd9b80473bec0a049b2f6ab9d13611fa
   - enabled: 1
-    path: Assets/FEATURES/AR_BASKET.unity
+    path: Assets/FEATURES/_to sort/AR_BASKET.unity
     guid: a419ff81c0d574b408e0ddbb5a8b1137
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 5ec75dfdb856a164d9bb152ab3a418f4,
