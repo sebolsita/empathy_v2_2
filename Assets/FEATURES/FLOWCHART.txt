@@ -16,11 +16,17 @@
       │           │         ├─── Play Voice audio
       │           │         │
       │           │         ▼
-      │           │  TextPanelController.Instance (Singleton)
+      │           │  [TextPanelController (Singleton)]
       │           │         │
       │           │         ├─── SetActiveSpeaker(Transform npcHead)
       │           │         ├─── SetText(string dialogueText)
       │           │         └─── [Panel continuously follows & faces player]
+      │           │
+      │           ├─── Movement Instructions
+      │           ├─── Object Interaction Instructions
+      │           ├─── Explain Locomotion Panel Usage
+      │           ├─── Explain Answer Panel Usage
+      │           ├─── Explain Hands-Only Mode
       │           │
       │           └─── Check if user completed step, then SaveProgress()
       │
@@ -39,11 +45,15 @@
       │           │         ├─── Play Voice audio
       │           │         │
       │           │         ▼
-      │           │   TextPanelController.Instance (Singleton)
+      │           │   [TextPanelController (Singleton)]
       │           │         │
       │           │         ├─── SetActiveSpeaker(Transform npcHead)
       │           │         ├─── SetText(string dialogueText)
       │           │         └─── [Panel continuously follows & faces player]
+      │           │
+      │           ├─── Scenario-Specific Events (Doctor Questions, Interpreter Help)
+      │           ├─── Player Response Handling (Answer Selection)
+      │           ├─── Scene Transitions (Doctor Office, Waiting Room)
       │           │
       │           └─── ScenarioController checks user interaction, then SaveProgress()
       │
@@ -52,31 +62,44 @@
       │           ▼
       │   [QuestionnaireController]
       │           │
-      │           └─── Display questions, collect answers, then SaveProgress()
+      │           ├─── Display questions
+      │           ├─── Collect answers
+      │           ├─── Submit results
+      │           │
+      │           └─── SaveProgress()
       │
       └─── (Credits / GameOver)
 
-Scripts Involved & Responsibilities
 
+      Scripts Involved & Responsibilities
 GameManager
-Controls main state (MainMenu, Onboarding, Scenario1, Scenario2, Questionnaire, Credits).
-
+Controls main game states: MainMenu, Onboarding, Scenario1, Scenario2, Questionnaire, Credits, Paused
+Handles state transitions
+Saves and loads game progress
 OnboardingController
-Manages sequence of onboarding tutorial, initializes Instructor NPC, saves progress.
-
+Manages onboarding sequence
+Spawns NPC Instructor
+Plays dialogue and controls step progression
+Saves progress at each step
 ScenarioController
-Manages scenario gameplay (spawns NPCs, controls interactions, saves progress).
-
+Manages scenario gameplay
+Spawns Doctor, Interpreter, Crowd NPCs
+Tracks player responses
+Controls scene transitions
+Saves progress at critical points
 NPCInstructorController / NPCDoctorController / NPCInterpreterController / CrowdNPCController
 Controls NPC-specific behavior:
-
-Load audio dynamically from Resources
-Trigger animations
-Set dialogues
+Loads audio dynamically from Resources
+Triggers animations
+Plays dialogue audio
+Sets text panel dialogue
 TextPanelController (Singleton)
 Manages UI for text displayed above NPC’s head:
-
-Automatically follows and smoothly rotates towards the player.
-Shows appropriate dialogue text.
+Automatically follows NPC
+Smoothly rotates to face player
+Displays dialogue text dynamically
 QuestionnaireController
-Handles questionnaire interaction and saves answers.
+Displays questions
+Collects answers
+Submits results
+Saves progress

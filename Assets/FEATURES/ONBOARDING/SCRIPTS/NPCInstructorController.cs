@@ -132,16 +132,12 @@ namespace Amused.XR
         /// <summary>
         /// Retrieves dialogue text associated with the specified line key.
         /// </summary>
+        /// <summary>
+        /// Retrieves dialogue text associated with the specified line key.
+        /// </summary>
         private string GetTextForLine(string lineKey)
         {
-            Dictionary<string, string> textLines = new Dictionary<string, string>
-            {
-                {"Instructor_1", "Welcome to the onboarding session."},
-                {"Instructor_2", "Here, we will teach you how to interact with the VR environment."},
-                {"Instructor_3", "Press the trigger to proceed."}
-            };
-
-            return textLines.TryGetValue(lineKey, out var text) ? text : "[Missing text for this line.]";
+            return OnboardingDialogueData.GetText(lineKey);
         }
 
         #endregion

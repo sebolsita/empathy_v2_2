@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,19 +10,17 @@ namespace Amused.XR
     {
         [Header("NPC Instructor Reference")]
         [SerializeField] private NPCInstructorController instructorNPC;
+        [SerializeField] private OnboardingStepsHandler stepsHandler;
 
-        [Header("Onboarding State")]
         private int currentStep = 0;
         private bool onboardingCompleted = false;
 
         private void Start()
         {
             LoadOnboardingProgress();
+            stepsHandler.Initialize(instructorNPC, this); // Pass both references
         }
 
-        /// <summary>
-        /// Starts the onboarding sequence from step 0.
-        /// </summary>
         public void StartOnboarding()
         {
             if (onboardingCompleted)
@@ -37,39 +34,16 @@ namespace Amused.XR
             ProceedToNextStep();
         }
 
-        /// <summary>
-        /// Proceeds to the next step in the onboarding sequence.
-        /// </summary>
         public void ProceedToNextStep()
         {
             Debug.Log($"[OnboardingController] Advancing to step {currentStep}");
 
-            switch (currentStep)
-            {
-                case 0:
-                    instructorNPC.PlayDialogue("Instructor_1"); // "Welcome to the onboarding session."
-                    break;
-                case 1:
-                    instructorNPC.PlayDialogue("Instructor_2"); // "Here, we will teach you how to interact with the VR environment."
-                    break;
-                case 2:
-                    instructorNPC.PlayDialogue("Instructor_3"); // "Press the trigger to proceed."
-                    break;
-                case 3:
-                    CompleteOnboarding();
-                    return;
-                default:
-                    Debug.LogWarning("[OnboardingController] Invalid step.");
-                    return;
-            }
+            stepsHandler.ExecuteStep(currentStep); // Call new handler script to execute the step.
 
             SaveOnboardingProgress();
             currentStep++;
         }
 
-        /// <summary>
-        /// Marks the onboarding as complete and saves progress.
-        /// </summary>
         private void CompleteOnboarding()
         {
             onboardingCompleted = true;
@@ -77,9 +51,6 @@ namespace Amused.XR
             Debug.Log("[OnboardingController] Onboarding completed. Transitioning to next phase.");
         }
 
-        /// <summary>
-        /// Saves onboarding progress.
-        /// </summary>
         private void SaveOnboardingProgress()
         {
             PlayerPrefs.SetInt("OnboardingStep", currentStep);
@@ -88,9 +59,6 @@ namespace Amused.XR
             Debug.Log($"[OnboardingController] Saved progress: Step {currentStep}, Completed: {onboardingCompleted}");
         }
 
-        /// <summary>
-        /// Loads saved onboarding progress.
-        /// </summary>
         private void LoadOnboardingProgress()
         {
             currentStep = PlayerPrefs.GetInt("OnboardingStep", 0);
@@ -99,9 +67,6 @@ namespace Amused.XR
             Debug.Log($"[OnboardingController] Loaded progress: Step {currentStep}, Completed: {onboardingCompleted}");
         }
 
-        /// <summary>
-        /// Resets onboarding progress.
-        /// </summary>
         public void ResetOnboarding()
         {
             PlayerPrefs.DeleteKey("OnboardingStep");
@@ -115,3 +80,4 @@ namespace Amused.XR
         }
     }
 }
+
