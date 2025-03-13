@@ -12,6 +12,9 @@ namespace Amused.XR
         [SerializeField] private NPCInstructorController instructorNPC;
         [SerializeField] private OnboardingStepsHandler stepsHandler;
 
+        [Header("Onboarding Triggers")]
+        [SerializeField] private GameObject movementTriggerZone; // Assign in Inspector
+
         private int currentStep = 0;
         private bool onboardingCompleted = false;
 
@@ -77,6 +80,23 @@ namespace Amused.XR
             onboardingCompleted = false;
 
             Debug.Log("[OnboardingController] Onboarding reset.");
+        }
+
+        /// <summary>
+        /// Activates the movement trigger area and waits for the player.
+        /// </summary>
+        public void WaitForColliderTrigger()
+        {
+            Debug.Log("[OnboardingController] Activating movement trigger. Waiting for player...");
+
+            if (movementTriggerZone != null)
+            {
+                movementTriggerZone.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("[OnboardingController] Movement trigger is not assigned!");
+            }
         }
     }
 }

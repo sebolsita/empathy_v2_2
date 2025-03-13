@@ -83,8 +83,9 @@ namespace Amused.XR
         /// </summary>
         private void OnTextCompleted()
         {
-            Debug.Log("[LettersController] Text display completed.");
-            onTextComplete?.Invoke();
+            Debug.Log("[LettersController] Text display completed. Notifying NPCInstructorController.");
+            onTextComplete?.Invoke(); // Ensure the callback is fired
         }
+
     }
 }

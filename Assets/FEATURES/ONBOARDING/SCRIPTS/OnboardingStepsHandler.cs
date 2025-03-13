@@ -67,6 +67,7 @@ namespace Amused.XR
                     break;
                 case 3:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2b", shouldAutoProceed);
+                    onboardingController.WaitForColliderTrigger(); // Activate the trigger
                     break;
                 case 4:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2c", shouldAutoProceed);
