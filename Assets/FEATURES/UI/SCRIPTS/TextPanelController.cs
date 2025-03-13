@@ -67,14 +67,16 @@ public class TextPanelController : MonoBehaviour
     }
 
     /// <summary>
-    /// Displays the dialogue text using LettersController.
+    /// Displays the dialogue text using LettersController with proper speed settings.
     /// </summary>
-    public void SetText(string dialogueText, float audioDuration = -1f)
+    public void DisplayTextWithTyping(string dialogueText, float audioDuration, bool isEstimated)
     {
         if (lettersController != null)
         {
-            lettersController.StartDisplayingText(dialogueText, audioDuration);
-            Debug.Log($"[TextPanelController] Displaying text with letters controller: {dialogueText}");
+            // NEW: Fix the argument order to correctly pass the estimated flag.
+            lettersController.StartDisplayingText(dialogueText, audioDuration, isEstimated, null);
+
+            Debug.Log($"[TextPanelController] Displaying text with letters controller: {dialogueText} (Estimated: {isEstimated})");
         }
         else
         {

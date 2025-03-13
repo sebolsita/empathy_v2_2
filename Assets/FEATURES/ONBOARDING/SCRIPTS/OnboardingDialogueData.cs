@@ -17,7 +17,7 @@ namespace Amused.XR
             {"onboarding_interpreter_1b", "This is your main text panel. It will display important information throughout the simulation."},
             {"onboarding_interpreter_1c", "This panel can also be accessed from the menu at any time."},
 
-            {"onboarding_interpreter_2a", "Move around using the left stick, and rotate using the right one."},
+            {"onboarding_interpreter_2a", "Move around using the left stick, and rotate using the right one. Click the left stick to sprint or the right one to crouch, and if you want to stand up, press it again."},
             {"onboarding_interpreter_2b", "Move to the highlighted area to continue."},
             {"onboarding_interpreter_2c", "Teleportation is triggered by pressing the right stick."},
             {"onboarding_interpreter_2d", "You don’t need to use controllers for this simulation. If you prefer your hands, just place the controllers down, and training info on how to use hands will be displayed above them."},

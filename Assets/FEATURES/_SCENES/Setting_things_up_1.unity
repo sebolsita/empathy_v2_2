@@ -19987,7 +19987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 3515293}
-  defaultLetterDelay: 0.05
+  audioSpeedMultiplier: 0.82
+  estimatedSpeedMultiplier: 0.4
 --- !u!1 &1367130406
 GameObject:
   m_ObjectHideFlags: 0
@@ -34746,12 +34747,17 @@ PrefabInstance:
     - target: {fileID: 7484021570037303115, guid: fa7045904d8c1c74abbbc56bd16bcd33,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484021570037303115, guid: fa7045904d8c1c74abbbc56bd16bcd33,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7484021570037303115, guid: fa7045904d8c1c74abbbc56bd16bcd33,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -190.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7637228316137902627, guid: fa7045904d8c1c74abbbc56bd16bcd33,
         type: 3}
@@ -34813,6 +34819,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7998446789794446376, guid: fa7045904d8c1c74abbbc56bd16bcd33,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8128176309725515219, guid: fa7045904d8c1c74abbbc56bd16bcd33,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -34852,6 +34863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336288720942833029, guid: fa7045904d8c1c74abbbc56bd16bcd33,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8553415823749015371, guid: fa7045904d8c1c74abbbc56bd16bcd33,
         type: 3}
@@ -37071,7 +37087,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceAudioSource: {fileID: 1019619952}
   lipSyncAudioSource: {fileID: 1262134714}
-  dialogueText: {fileID: 3515293}
   instructorAnimator: {fileID: 0}
   npcHead: {fileID: 8865470725274901197}
 --- !u!1660057539 &9223372036854775807
