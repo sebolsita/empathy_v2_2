@@ -34,80 +34,74 @@ namespace Amused.XR
                 case 1:
                     instructorNPC.PlayDialogue("onboarding_interpreter_1b"); // "This is your main text panel..."
                     break;
-                case 2:
-                    instructorNPC.PlayDialogue("onboarding_interpreter_1c"); // "This panel can also be accessed from the menu."
-                    break;
 
                 // **Step 2: Movement Tutorial**
-                case 3:
+                case 2:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2a"); // "Move around using the left stick..."
                     SaveProgress();
                     break;
-                case 4:
+                case 3:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2b"); // "Move to the highlighted area to continue."
                     //onboardingController.WaitForColliderTrigger();
                     break;
-                case 5:
+                case 4:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2c"); // "Teleportation is triggered by pressing the right stick."
                     break;
-                case 6:
+                case 5:
                     instructorNPC.PlayDialogue("onboarding_interpreter_2d"); // "You don’t need to use controllers for this simulation..."
                     break;
 
                 // **Step 3: Interaction Tutorial**
-                case 7:
+                case 6:
                     instructorNPC.PlayDialogue("onboarding_interpreter_3a"); // "Some objects in the environment can be grabbed..."
                     SaveProgress();
                     break;
-                case 8:
+                case 7:
                     instructorNPC.PlayDialogue("onboarding_interpreter_3b"); // "Try picking up the traffic cone in front of you."
                     //onboardingController.WaitForObjectGrab();
                     break;
-                case 9:
+                case 8:
                     instructorNPC.PlayDialogue("onboarding_interpreter_3c"); // "Well done! Now, let’s move on."
                     break;
 
                 // **Step 4: Understanding the Experience**
-                case 10:
+                case 9:
                     instructorNPC.PlayDialogue("onboarding_interpreter_4a"); // "This experience consists of two scenarios..."
                     SaveProgress();
                     break;
-                case 11:
+                case 10:
                     instructorNPC.PlayDialogue("onboarding_interpreter_4b"); // "First, you will play without an interpreter."
                     break;
-                case 12:
-                    instructorNPC.PlayDialogue("onboarding_interpreter_4c"); // "Then, you will play with an interpreter..."
-                    break;
-                case 13:
-                    instructorNPC.PlayDialogue("onboarding_interpreter_4d"); // "You can resume from the menu if you need to take a break."
+                case 11:
+                    instructorNPC.PlayDialogue("onboarding_interpreter_4c"); // "Your progress is being tracked..."
                     break;
 
                 // **Step 5: Ready Check**
-                case 14:
+                case 12:
                     instructorNPC.PlayDialogue("onboarding_interpreter_5a"); // "If you feel ready, press Yes. If you want to repeat, press No."
                     SaveProgress();
                     //onboardingController.WaitForPlayerInput();
                     break;
-                case 15:
+                case 13:
                     instructorNPC.PlayDialogue("onboarding_interpreter_5b_yes"); // "Please follow me."
                     //onboardingController.MoveInstructorToDoor();
                     break;
-                case 16:
+                case 14:
                     instructorNPC.PlayDialogue("onboarding_interpreter_5c_yes"); // "Okay, now please enter the waiting room..."
                     //onboardingController.EnableDoorInteraction();
                     break;
-                case 17:
+                case 15:
                     instructorNPC.PlayDialogue("onboarding_interpreter_5d_yes"); // "Just reach your hand to the door to open it."
                     //onboardingController.WaitForPlayerEnterRoom();
                     break;
-                case 18:
+                case 16:
                     // Player has entered the room
                     //onboardingController.TransitionToScenario1();
                     SaveProgress();
                     break;
 
                 // **Restarting Onboarding**
-                case 19:
+                case 17:
                     instructorNPC.PlayDialogue("onboarding_interpreter_5b_no"); // "Restarting onboarding tutorial..."
                     onboardingController.ResetOnboarding();
                     SaveProgress();
