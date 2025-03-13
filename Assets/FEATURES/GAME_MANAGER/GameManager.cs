@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace Amused.XR
 {
     /// <summary>
-    /// Manages overall game states, controls transitions between scenarios, and initiates onboarding.
+    /// Controls game flow, manages states, UI panels, onboarding, and scenario progression.
     /// </summary>
     public class GameManager : MonoBehaviour
     {
@@ -17,14 +17,23 @@ namespace Amused.XR
 
         #region SERIALIZED PRIVATE FIELDS
 
-        [Header("Controllers")]
-        [SerializeField] private OnboardingController onboardingController;
+        [Header("Game Panels")]
+        [SerializeField] private GameObject menuPanel;
+        [SerializeField] private GameObject answerPanel;
+        [SerializeField] private GameObject questionnairePanel; // placeholder
+        [SerializeField] private GameObject pausePanel; // placeholder
+        [SerializeField] private GameObject creditsPanel; // placeholder
 
-        [Header("UI Panels")]
-        [SerializeField] private GameObject mainMenuPanel;
-        [SerializeField] private GameObject onboardingPanel;
-        [SerializeField] private GameObject gameplayPanel;
-        [SerializeField] private GameObject pauseMenuPanel;
+        [Header("Gameplay References")]
+        [SerializeField] private OnboardingController onboardingController;
+        [SerializeField] private float sceneTransitionDelay = 1.5f;
+
+        #endregion
+
+        #region PRIVATE FIELDS
+
+        private int _currentScenarioIndex = 0;
+        private bool _isPaused = false;
 
         #endregion
 
@@ -45,6 +54,7 @@ namespace Amused.XR
 
         private void Start()
         {
+            LoadProgress();
             SetState(GameState.MainMenu);
         }
 
@@ -53,7 +63,7 @@ namespace Amused.XR
         #region PUBLIC METHODS
 
         /// <summary>
-        /// Sets the game state and handles transitions accordingly.
+        /// Updates game state and handles corresponding actions.
         /// </summary>
         public void SetState(GameState newState)
         {
@@ -65,96 +75,142 @@ namespace Amused.XR
                 case GameState.MainMenu:
                     ShowMainMenu();
                     break;
-
                 case GameState.Onboarding:
                     StartOnboarding();
                     break;
-
-                case GameState.Playing:
-                    StartGameplay();
+                case GameState.Scenario1:
+                    StartScenario(1);
                     break;
-
+                case GameState.Scenario2:
+                    StartScenario(2);
+                    break;
+                case GameState.Survey:
+                    ShowSurvey();
+                    break;
+                case GameState.Credits:
+                    ShowCredits();
+                    break;
                 case GameState.Paused:
                     PauseGame();
                     break;
-
-                case GameState.Credits:
-                    ShowCredits();
+                case GameState.Playing:
+                    ResumeGame();
                     break;
             }
         }
 
-        /// <summary>
-        /// Called from the onboarding button in Main Menu UI.
-        /// </summary>
-        public void OnOnboardingButtonPressed()
+        public void StartOnboarding()
         {
-            SetState(GameState.Onboarding);
+            menuPanel.SetActive(false);
+            answerPanel.SetActive(true);
+            onboardingController.StartOnboarding();
+            Debug.Log("[GameManager] Onboarding started.");
+        }
+
+        public void StartScenario(int scenarioNumber)
+        {
+            Debug.Log($"[GameManager] Scenario {scenarioNumber} started.");
+            // TODO: Add actual scenario loading logic here.
+        }
+
+        public void LoadNextScenario()
+        {
+            _currentScenarioIndex++;
+            SaveProgress();
+            Debug.Log($"[GameManager] Loading scenario {_currentScenarioIndex}");
+            // TODO: Implement scenario loading logic.
         }
 
         #endregion
 
-        #region PRIVATE METHODS
+        #region UI HANDLING METHODS
 
         private void ShowMainMenu()
         {
-            mainMenuPanel.SetActive(true);
-            onboardingPanel.SetActive(false);
-            gameplayPanel.SetActive(false);
-            pauseMenuPanel.SetActive(false);
+            menuPanel.SetActive(true);
+            answerPanel.SetActive(false);
+            questionnairePanel.SetActive(false);
+            creditsPanel.SetActive(false);
+            pausePanel.SetActive(false);
             Debug.Log("[GameManager] Main menu displayed.");
         }
 
-        private void StartOnboarding()
+        private void ShowSurvey()
         {
-            mainMenuPanel.SetActive(false);
-            onboardingPanel.SetActive(true);
-            gameplayPanel.SetActive(false);
-
-            if (onboardingController != null)
-            {
-                onboardingController.StartOnboarding();
-                Debug.Log("[GameManager] Onboarding initialized.");
-            }
-            else
-            {
-                Debug.LogError("[GameManager] OnboardingController reference missing!");
-            }
-        }
-
-        private void StartGameplay()
-        {
-            mainMenuPanel.SetActive(false);
-            onboardingPanel.SetActive(false);
-            gameplayPanel.SetActive(true);
-            Debug.Log("[GameManager] Gameplay started.");
-        }
-
-        private void PauseGame()
-        {
-            pauseMenuPanel.SetActive(true);
-            Time.timeScale = 0f;
-            Debug.Log("[GameManager] Game paused.");
+            questionnairePanel.SetActive(true);
+            Debug.Log("[GameManager] Displaying questionnaire panel.");
         }
 
         private void ShowCredits()
         {
-            Debug.Log("[GameManager] Credits displayed.");
-            // Implement credits panel logic here
+            creditsPanel.SetActive(true);
+            Debug.Log("[GameManager] Credits panel displayed.");
+        }
+
+        #endregion
+
+        #region SAVING AND LOADING
+
+        public void SaveProgress()
+        {
+            PlayerPrefs.SetInt("ScenarioIndex", _currentScenarioIndex);
+            PlayerPrefs.Save();
+            Debug.Log($"[GameManager] Progress saved: Scenario {_currentScenarioIndex}");
+        }
+
+        public void LoadProgress()
+        {
+            _currentScenarioIndex = PlayerPrefs.GetInt("ScenarioIndex", 0);
+            Debug.Log($"[GameManager] Progress loaded: Scenario {_currentScenarioIndex}");
+        }
+
+        public void ResetProgress()
+        {
+            _currentScenarioIndex = 0;
+            SaveProgress();
+            Debug.Log("[GameManager] Progress reset.");
+        }
+
+        #endregion
+
+        #region PAUSE HANDLING
+
+        public void PauseGame()
+        {
+            _isPaused = true;
+            Time.timeScale = 0f;
+            pausePanel.SetActive(true);
+            Debug.Log("[GameManager] Game paused.");
+        }
+
+        public void ResumeGame()
+        {
+            _isPaused = false;
+            Time.timeScale = 1f;
+            pausePanel.SetActive(false);
+            Debug.Log("[GameManager] Game resumed.");
+        }
+
+        public void TogglePause()
+        {
+            if (_isPaused)
+                ResumeGame();
+            else
+                PauseGame();
         }
 
         #endregion
     }
 
-    /// <summary>
-    /// Enum representing different game states.
-    /// </summary>
     public enum GameState
     {
         MainMenu,
         Onboarding,
-        Playing,
+        Scenario1,
+        Scenario2,
+        Survey,
+        Credits,
         Paused,
-        Credits
+        Playing
     }
 }
