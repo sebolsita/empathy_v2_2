@@ -18225,6 +18225,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3334373085931298477}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1262134714 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9011848594227599518, guid: ef1de520a91a8e146b3227facd6ebe75,
+    type: 3}
+  m_PrefabInstance: {fileID: 8313945494921813282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1262391366
 GameObject:
   m_ObjectHideFlags: 0
@@ -19919,13 +19925,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366506295}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -46.198, y: 3.552, z: 0.178}
-  m_LocalScale: {x: 0.048413552, y: 1, z: 0.2083326}
+  m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: -0, w: 0}
+  m_LocalPosition: {x: 52.39201, y: -2.0479999, z: -41.898003}
+  m_LocalScale: {x: 0.048413545, y: 1, z: 0.20833252}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3515295}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1852566465}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
 --- !u!1 &1367130406
 GameObject:
@@ -27921,6 +27927,7 @@ Transform:
   - {fileID: 1255544582}
   - {fileID: 1534492612}
   - {fileID: 1745387172}
+  - {fileID: 1366506300}
   - {fileID: 1038905076}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -35748,6 +35755,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5537964992815957328, guid: 9bddf44652578d045a4d3e7344f135e0,
         type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 110.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537964992815957328, guid: 9bddf44652578d045a4d3e7344f135e0,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -392.99973
       objectReference: {fileID: 0}
@@ -36597,7 +36609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceAudioSource: {fileID: 1019619952}
-  lipSyncAudioSource: {fileID: 0}
+  lipSyncAudioSource: {fileID: 1262134714}
   dialogueText: {fileID: 3515293}
   instructorAnimator: {fileID: 0}
   npcHead: {fileID: 8865470725274901197}
@@ -36613,4 +36625,3 @@ SceneRoots:
   - {fileID: 509178964}
   - {fileID: 191087638}
   - {fileID: 1239649763}
-  - {fileID: 1366506300}

@@ -45,45 +45,72 @@ namespace Amused.XR
         /// <summary>
         /// Plays a line of dialogue, updating text, triggering animation, and ensuring the panel follows the NPC.
         /// </summary>
+        /// <summary>
+        /// Plays a line of dialogue, updating text, triggering animation, lip-sync, and panel.
+        /// </summary>
         public void PlayDialogue(string lineKey)
         {
-            Debug.Log($"[NPCInstructorController] Playing dialogue line: {lineKey}");
+            Debug.Log($"[NPCInstructorController] Attempting to play line: {lineKey}");
 
-            // Inform panel about active NPC speaker
+            // Set active speaker and text in TextPanelController
             if (TextPanelController.Instance != null)
             {
                 TextPanelController.Instance.SetActiveSpeaker(npcHead);
                 TextPanelController.Instance.SetText(GetTextForLine(lineKey));
-                Debug.Log("[NPCInstructorController] TextPanel assigned to NPC Instructor.");
             }
             else
             {
-                Debug.LogWarning("[NPCInstructorController] Missing reference to TextPanelController.");
+                Debug.LogWarning("[NPCInstructorController] TextPanelController is missing!");
             }
 
-            // Trigger talking animation
+            // Play animation
             if (instructorAnimator != null)
             {
                 instructorAnimator.SetTrigger("Talk");
-                Debug.Log("[NPCInstructorController] Instructor animation triggered.");
             }
             else
             {
-                Debug.LogWarning("[NPCInstructorController] Instructor animator is missing.");
+                Debug.LogWarning("[NPCInstructorController] No Animator assigned.");
             }
 
-            // Play audio
-            if (audioClips.ContainsKey(lineKey) && voiceAudioSource != null)
+            // Handle voice audio
+            if (audioClips.ContainsKey(lineKey))
             {
-                voiceAudioSource.clip = audioClips[lineKey];
-                voiceAudioSource.Play();
-                Debug.Log($"[NPCInstructorController] Playing audio clip: {lineKey}");
+                AudioClip clipToPlay = audioClips[lineKey];
+
+                if (voiceAudioSource != null)
+                {
+                    voiceAudioSource.clip = clipToPlay;
+                    voiceAudioSource.Play();
+                }
+                else
+                {
+                    Debug.LogWarning("[NPCInstructorController] Missing voice audio source.");
+                }
+
+                if (lipSyncAudioSource != null)
+                {
+                    lipSyncAudioSource.clip = clipToPlay;
+                    lipSyncAudioSource.Play();
+                    Debug.Log($"[NPCInstructorController] Lip sync playing for {lineKey}");
+                }
+                else
+                {
+                    Debug.LogWarning("[NPCInstructorController] Missing LipSync AudioSource.");
+                }
             }
             else
             {
-                Debug.LogWarning($"[NPCInstructorController] Audio clip missing or AudioSource not assigned for line: {lineKey}");
+                Debug.LogWarning($"[NPCInstructorController] Missing audio clip for line: {lineKey}");
+            }
+
+            // Trigger animation
+            if (instructorAnimator != null)
+            {
+                instructorAnimator.SetTrigger("Talk");
             }
         }
+
 
         #endregion
 
