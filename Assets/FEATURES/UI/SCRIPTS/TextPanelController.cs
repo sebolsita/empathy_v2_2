@@ -69,12 +69,11 @@ public class TextPanelController : MonoBehaviour
     /// <summary>
     /// Displays the dialogue text using LettersController with proper speed settings.
     /// </summary>
-    public void DisplayTextWithTyping(string dialogueText, float audioDuration, bool isEstimated)
+    public void DisplayTextWithTyping(string dialogueText, float audioDuration, bool isEstimated, System.Action onComplete)
     {
         if (lettersController != null)
         {
-            // NEW: Fix the argument order to correctly pass the estimated flag.
-            lettersController.StartDisplayingText(dialogueText, audioDuration, isEstimated, null);
+            lettersController.StartDisplayingText(dialogueText, audioDuration, isEstimated, onComplete);
 
             Debug.Log($"[TextPanelController] Displaying text with letters controller: {dialogueText} (Estimated: {isEstimated})");
         }
@@ -83,6 +82,7 @@ public class TextPanelController : MonoBehaviour
             Debug.LogWarning("[TextPanelController] LettersController is missing!");
         }
     }
+
 
     /// <summary>
     /// Updates the panel's position above the NPC and ensures it faces the player correctly.
