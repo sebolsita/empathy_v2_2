@@ -19843,8 +19843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d808c0d3c3c1c4eb05e3d71fc62783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcHead: {fileID: 0}
-  textComponent: {fileID: 3515293}
+  panel: {fileID: 1366506300}
+  player: {fileID: 1668834791}
+  offset: {x: 0, y: 2.2, z: 0}
+  rotationOffset: {x: 0, y: 90, z: 90}
+  rotationSpeed: 5
 --- !u!64 &1366506297
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19925,14 +19928,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366506295}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: -0, w: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: 0, w: 0}
   m_LocalPosition: {x: 52.39201, y: -2.0479999, z: -41.898003}
   m_LocalScale: {x: 0.048413545, y: 1, z: 0.20833252}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3515295}
   m_Father: {fileID: 1852566465}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 90}
 --- !u!1 &1367130406
 GameObject:
   m_ObjectHideFlags: 0
@@ -32322,6 +32325,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612465210734056713, guid: c2d2cea48f700514bacf40968bf2b274,
         type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 221
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612465210734056713, guid: c2d2cea48f700514bacf40968bf2b274,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 146
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612465210734056713, guid: c2d2cea48f700514bacf40968bf2b274,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 363.5
       objectReference: {fileID: 0}
@@ -32329,6 +32342,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -72.99985
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332157997859581507, guid: c2d2cea48f700514bacf40968bf2b274,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 221
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332157997859581507, guid: c2d2cea48f700514bacf40968bf2b274,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 146
       objectReference: {fileID: 0}
     - target: {fileID: 5332157997859581507, guid: c2d2cea48f700514bacf40968bf2b274,
         type: 3}
