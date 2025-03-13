@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Amused.XR;
 
 /// <summary>
 /// Controls positioning and text display for the NPC dialogue panel.
@@ -26,7 +27,7 @@ public class TextPanelController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform panel; // Assign only the panel in the inspector
     [SerializeField] private Transform player; // Assign the player's head/camera
-    private TextMeshPro textComponent;
+    [SerializeField] private LettersController lettersController; // Handles text animation
 
     [Header("Panel Settings")]
     [SerializeField] private Vector3 offset = new Vector3(0, 0.3f, 0); // Editable offset for position adjustments
@@ -37,12 +38,14 @@ public class TextPanelController : MonoBehaviour
 
     private void Start()
     {
-        // Automatically find the TextMeshPro component inside the panel
-        textComponent = panel.GetComponentInChildren<TextMeshPro>();
-
-        if (textComponent == null)
+        if (lettersController == null)
         {
-            Debug.LogError("[TextPanelController] TextMeshPro component not found!");
+            lettersController = panel.GetComponentInChildren<LettersController>();
+        }
+
+        if (lettersController == null)
+        {
+            Debug.LogError("[TextPanelController] LettersController component not found!");
         }
     }
 
@@ -64,18 +67,18 @@ public class TextPanelController : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the displayed text.
+    /// Displays the dialogue text using LettersController.
     /// </summary>
-    public void SetText(string dialogueText)
+    public void SetText(string dialogueText, float audioDuration = -1f)
     {
-        if (textComponent != null)
+        if (lettersController != null)
         {
-            textComponent.text = dialogueText;
-            Debug.Log($"[TextPanelController] Updated panel text: {dialogueText}");
+            lettersController.StartDisplayingText(dialogueText, audioDuration);
+            Debug.Log($"[TextPanelController] Displaying text with letters controller: {dialogueText}");
         }
         else
         {
-            Debug.LogWarning("[TextPanelController] Text component reference is missing!");
+            Debug.LogWarning("[TextPanelController] LettersController is missing!");
         }
     }
 
